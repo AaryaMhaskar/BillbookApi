@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BillBookFinal_ConsumingPart.Models.AllSalesSummary>
+
+@{
+    ViewData["Title"] = "AllSalesSummary";
+}
+
+<h1>AllSalesSummary</h1>
+
+
+<select id="FetchParty">
+
+</select>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.invoiceDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.invoiceId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.partyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.invoiceStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="salesSummaryBody">
+        @foreach (var item in Model) // This populates the table on initial load
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.invoiceDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.invoiceId)</td>
+                <td>@Html.DisplayFor(modelItem => item.partyName)</td>
+                <td>@Html.DisplayFor(modelItem => item.dueDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.amount)</td>
+                <td>@Html.DisplayFor(modelItem => item.invoiceStatus)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="\lib\jquery\dist\jquery.min.js"></script>
+<script src="\lib\jquery\dist\jquery.js"></script>
+<script src="\ajax\javascript.js"></script>
