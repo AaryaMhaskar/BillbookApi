@@ -1,0 +1,76 @@
+﻿@model IEnumerable<BillBookFinal_ConsumingPart.Models.BillWiseProfit>
+
+@{
+    ViewData["Title"] = "AllBillWiseProfit";
+}
+
+<h1>AllBillWiseProfit</h1>
+
+<select id="FetchBill">
+</select>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BillTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryItemid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.invoicedate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.salesprice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.purchaseprice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profit)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="salesSummaryBody">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InventoryItemid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.invoicedate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.salesprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.purchaseprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profit)
+            </td>
+          
+        </tr>
+}
+    </tbody>
+</table>
+<script src="\lib\jquery\dist\jquery.min.js"></script>
+<script src="\lib\jquery\dist\jquery.js"></script>
+<script src="\ajax\javascript.js"></script>

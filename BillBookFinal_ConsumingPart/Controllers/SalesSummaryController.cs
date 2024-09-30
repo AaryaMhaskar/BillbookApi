@@ -8,6 +8,7 @@ namespace BillBookFinal_ConsumingPart.Controllers
     {
         private readonly HttpClient client;
 
+
         public SalesSummaryController()
         {
             HttpClientHandler clienthandler = new HttpClientHandler();
@@ -29,9 +30,7 @@ namespace BillBookFinal_ConsumingPart.Controllers
                 saless = JsonConvert.DeserializeObject<List<AllSalesSummary>>(jsondata);
             }
 
-
             return View(saless);
-
 
         }
 
@@ -77,7 +76,48 @@ namespace BillBookFinal_ConsumingPart.Controllers
             }
         }
 
+        public IActionResult FetchStatus()
+        {
+            List<Status> statusDropdowns = new List<Status>();
+            string url = "https://localhost:44371/api/SalesSummary/GetStatus";
+            HttpResponseMessage mes = client.GetAsync(url).Result;
+            if (mes.IsSuccessStatusCode)
+            {
+                var jsondata = mes.Content.ReadAsStringAsync().Result;
+                statusDropdowns = JsonConvert.DeserializeObject<List<Status>>(jsondata);
+                return Json(statusDropdowns);
+            }
+            else
+            {
+                return Json(null);
+            }
+        }
 
+        public IActionResult SalesSummaryByStatus(string Status)
+        {
+            if (string.IsNullOrEmpty(Status))
+            {
+                TempData["Msg"] = "Status  is required.";
+                return View();
+            }
+
+            string url = $"https://localhost:44371/api/SalesSummary/GetSalesByStatus/{Status}";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsondata = response.Content.ReadAsStringAsync().Result;
+                var students = JsonConvert.DeserializeObject<List<AllSalesSummary>>(jsondata);
+                return Json(students);
+            }
+            else
+            {
+                TempData["Msg"] = "Could not fetch sales record.";
+                return View();
+            }
+        }
+
+        
     }
 }
 
